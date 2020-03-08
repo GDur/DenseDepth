@@ -21,6 +21,7 @@ Offical Keras (TensorFlow) implementaiton. If you have any questions or need mor
 </p>
 
 ## Requirements
+* download the model via `curl https://s3-eu-west-1.amazonaws.com/densedepth/nyu.h5 -O ./nyu.h5`
 * install all python requirements via `pip install -r requirements.txt`
 * This code is tested with Keras 2.2.4, Tensorflow 1.13, CUDA 10.0, on a machine with an NVIDIA Titan V and 16GB+ RAM running on Windows 10 or Ubuntu 16.
 * Minimum hardware tested on for inference NVIDIA GeForce 940MX (laptop) / NVIDIA GeForce GTX 950 (desktop).
