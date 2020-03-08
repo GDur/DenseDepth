@@ -36,7 +36,7 @@ rgb_height = height_rgb
 import tensorflow as tf
 global graph,model
 graph = tf.get_default_graph()
-
+raspberryStreamUrl = 'http://192.168.0.9:8000/stream.mjpg'
 def load_model():
     # Kerasa / TensorFlow
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '5'
@@ -114,7 +114,7 @@ class Window(QtWidgets.QWidget):
         self.button2.clicked.connect(self.loadCamera)
         toolsLayout.addWidget(self.button2)
 
-        self.button3 = QtWidgets.QPushButton("Video")
+        self.button3 = QtWidgets.QPushButton("Raspberry Cam Stream")
         self.button3.clicked.connect(self.loadVideoFile)
         toolsLayout.addWidget(self.button3)
 
@@ -149,12 +149,12 @@ class Window(QtWidgets.QWidget):
         self.updateCloud()
         QtGui.QGuiApplication.restoreOverrideCursor()
 
-    def loadCamera(self):        
+    def loadCamera(self):
         self.capture = cv2.VideoCapture(0)
         self.updateInput.emit()
 
     def loadVideoFile(self):
-        self.capture = cv2.VideoCapture('video.mp4')
+        self.capture = cv2.VideoCapture(raspberryStreamUrl)
         self.updateInput.emit()
 
     def loadImage(self):
