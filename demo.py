@@ -44,9 +44,6 @@ raspberryPiIp = '192.168.0.9'
 streamVideoPath = 'workspace/robot-platform-1/stream_vid.py'
 
 
-# start the streaming
-subprocess.Popen(["ssh", '-t', 'pi@' + raspberryPiIp, "python3", streamVideoPath])
-raspberryStreamUrl = 'http://' + raspberryPiIp + ':8000/stream.mjpg'
 def load_model():
     # Kerasa / TensorFlow
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '5'
@@ -124,6 +121,9 @@ class Window(QtWidgets.QWidget):
         self.button2.clicked.connect(self.loadCamera)
         toolsLayout.addWidget(self.button2)
 
+        self.raspberryIpLabel = QtWidgets.QLabel('Raspberry Pi IP:' + raspberryPiIp)
+        toolsLayout.addWidget(self.raspberryIpLabel)
+
         self.button3 = QtWidgets.QPushButton("Raspberry Cam Stream")
         self.button3.clicked.connect(self.loadVideoFile)
         toolsLayout.addWidget(self.button3)
@@ -164,6 +164,9 @@ class Window(QtWidgets.QWidget):
         self.updateInput.emit()
 
     def loadVideoFile(self):
+        # start the streaming
+        subprocess.Popen(["ssh", '-t', 'pi@' + raspberryPiIp, "python3", streamVideoPath])
+        raspberryStreamUrl = 'http://' + raspberryPiIp + ':8000/stream.mjpg'
         self.capture = cv2.VideoCapture(raspberryStreamUrl)
         self.updateInput.emit()
 
