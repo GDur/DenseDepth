@@ -5,6 +5,7 @@ import time
 import math
 import argparse
 import numpy as np
+import subprocess
 
 # Computer Vision
 import cv2
@@ -36,7 +37,16 @@ rgb_height = height_rgb
 import tensorflow as tf
 global graph,model
 graph = tf.get_default_graph()
-raspberryStreamUrl = 'http://192.168.0.9:8000/stream.mjpg'
+
+# Adjust the ip for your raspberry here
+# don't forget to add the stream_vid.py and adjust the path accordingly
+raspberryPiIp = '192.168.0.9'
+streamVideoPath = 'workspace/robot-platform-1/stream_vid.py'
+
+
+# start the streaming
+subprocess.Popen(["ssh", '-t', 'pi@' + raspberryPiIp, "python3", streamVideoPath])
+raspberryStreamUrl = 'http://' + raspberryPiIp + ':8000/stream.mjpg'
 def load_model():
     # Kerasa / TensorFlow
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '5'
