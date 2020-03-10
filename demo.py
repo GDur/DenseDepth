@@ -39,9 +39,9 @@ global graph,model
 graph = tf.get_default_graph()
 
 # Adjust the ip for your raspberry here
-# don't forget to add the stream_vid.py and adjust the path accordingly
+# don't forget to add the rpi_camera_surveillance_system.py and adjust the path accordingly
 raspberryPiIp = '192.168.0.9'
-streamVideoPath = 'workspace/robot-platform-1/stream_vid.py'
+streamVideoPath = 'workspace/robot-platform-1/rpi_camera_surveillance_system.py'
 
 
 def load_model():
